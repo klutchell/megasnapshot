@@ -3,6 +3,7 @@
 ## Description ##
 
 * docker image to mount my MEGA.nz cloud drive and upload snapshots
+* uses https://github.com/matteoserva/MegaFuse for mounting
 
 ## Building ##
 
