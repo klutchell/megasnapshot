@@ -30,6 +30,7 @@ RUN \
     rm -rf /tmp/* && \
     rm -rf /var/tmp/*
 
+COPY ./megafuse.conf /root/
 COPY ./start.sh /root/
 
 RUN chmod +x /root/start.sh

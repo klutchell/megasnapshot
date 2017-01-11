@@ -5,26 +5,22 @@
 * docker image to mount my MEGA.nz cloud drive and upload snapshots
 * uses https://github.com/matteoserva/MegaFuse for mounting
 
-## Building ##
+## Usage ##
 
+### docker ###
+#### build ####
 ```bash
 git clone git@github.com:klutchell/docker-megasync.git ~/.docker/images/megasync
 docker build -t megasync ~/.docker/images/megasync
 ```
-
-## Usage ##
-
-### docker ###
+#### run ####
 ```bash
 docker run \
     --rm
+    --privileged
     --name=megasync \
     -v path/to/config:/config \
     -v path/to/snapshots/target:/snapshots \
-    -v /etc/localtime:/etc/localtime:ro \
-    -v /dev/rtc:/dev/rtc:ro \
-    -e PGID=<gid> -e PUID=<uid>  \
-    -e TZ=<timezone> \
     -e HOSTNAME=$HOSTNAME \
     -e MEGAUSER=<mega username> \
     -e MEGAPASS=<mega password> \
@@ -32,26 +28,14 @@ docker run \
 ```
 
 ### docker-compose ###
+#### build ####
 ```bash
-nano ~/.docker/megasync.yml
+git clone git@github.com:klutchell/docker-megasync.git ~/.docker/images/megasync
+HOSTNAME=$HOSTNAME docker-compose -f ~/.docker/images/megasync/megasync.yml build megasync
 ```
-```yaml
-version: '2'
-services:
-    megasync:
-        build: ./images/megasync
-        container_name: megasync
-        hostname: ${HOSTNAME}
-        privileged: true
-        volumes:
-            - ./volumes/megasync/config:/config
-            - ./volumes/rsnapshot/target:/snapshots
-            - /etc/localtime:/etc/localtime:ro
-            - /dev/rtc:/dev/rtc:ro
-```
+#### run ####
 ```bash
-HOSTNAME=$HOSTNAME docker-compose -f ~/.docker/megasync.yml build megasync
-HOSTNAME=$HOSTNAME docker-compose -f ~/.docker/megasync.yml run --rm megasync
+HOSTNAME=$HOSTNAME docker-compose -f ~/.docker/images/megasync/megasync.yml run --rm megasync
 ```
 
 ## Contributing ##
