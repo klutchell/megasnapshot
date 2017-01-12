@@ -11,7 +11,7 @@ else
 fi
 
 # set snapshot location
-snapshot="/snapshots/alpha.0/localhost/source"
+snapshot="/snapshots/alpha.0"
 [ -d "${snapshot}" ] || { echo "snapshot not found"; exit 1; }
 
 # set destination path based on hostname and date
@@ -50,10 +50,12 @@ else
 	echo "megafuse failed or not ready"; exit 1
 fi
 
-# ls on the destination will force the cached upload to complete
 echo "uploading snapshot..."
+# force sync
 ls -lt "${dest}"/
 
-# delete oldest snapshot if more than 3 exist
 echo "removing old snapshots..."
+# delete oldest snapshot if more than 3 exist
 ls -t "${dest}"/ | sed -e '1,3d' | xargs -d '\n' rm -v
+# force sync
+ls -lt "${dest}"/
