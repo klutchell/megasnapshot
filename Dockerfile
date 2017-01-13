@@ -15,12 +15,7 @@ RUN \
       git \
       pkg-config \
       gettext \
-    && \
-
-# Fetch and make megafuse
-    git clone https://github.com/matteoserva/MegaFuse /opt/megafuse && \
-    cd /opt/megafuse && \
-    make \
+      megatools \
     && \
 
 # Cleanup
@@ -30,11 +25,11 @@ RUN \
     rm -rf /tmp/* && \
     rm -rf /var/tmp/*
 
-COPY ./megafuse.conf /root/
+COPY ./.megarc /root/
 COPY ./start.sh /root/
 
 RUN chmod +x /root/start.sh
 
-VOLUME /data /cache /config /snapshots
+VOLUME /config /snapshots /cache
 
 ENTRYPOINT ["/root/start.sh"]

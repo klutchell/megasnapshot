@@ -2,8 +2,8 @@
 
 ## Description ##
 
-* docker image to mount a MEGA.nz cloud drive and upload snapshots
-* uses https://github.com/matteoserva/MegaFuse for mounting
+* docker image to upload existing snapshots to a MEGA.nz cloud drive
+* uses https://github.com/megous/megatools
 
 ## Usage ##
 
