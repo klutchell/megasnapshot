@@ -31,7 +31,7 @@ docker run \
 #### build ####
 ```bash
 git clone git@github.com:klutchell/docker-megasync.git ~/.docker/images/megasync
-docker-compose -f ~/.docker/images/megasync/megasync.yml build megasync
+docker-compose -f ~/.docker/images/megasync/megasync.yml build --force-rm megasync
 ```
 #### run ####
 ```bash
