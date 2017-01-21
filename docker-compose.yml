@@ -5,7 +5,7 @@ services:
         container_name: megasync
         privileged: true
         volumes:
-            - /home/kyle/.docker/volumes/megasync/config:/config
-            - /home/kyle/.docker/volumes/rsnapshot/target:/snapshots
+            - /config:/config
+            - /home/kyle/no_snapshot/snapshots:/snapshots
             - /etc/localtime:/etc/localtime:ro
             - /dev/rtc:/dev/rtc:ro

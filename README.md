@@ -1,4 +1,4 @@
-# megasync #
+# docker-megasync #
 
 ## Description ##
 
@@ -10,8 +10,8 @@
 ### docker ###
 #### build ####
 ```bash
-git clone git@github.com:klutchell/docker-megasync.git ~/.docker/images/megasync
-docker build -t megasync ~/.docker/images/megasync
+git clone git@github.com:klutchell/docker-megasync.git ~/megasync
+docker build -t megasync ~/megasync
 ```
 #### run ####
 ```bash
@@ -30,12 +30,12 @@ docker run \
 ### docker-compose ###
 #### build ####
 ```bash
-git clone git@github.com:klutchell/docker-megasync.git ~/.docker/images/megasync
-docker-compose -f ~/.docker/images/megasync/megasync.yml build --force-rm megasync
+git clone git@github.com:klutchell/docker-megasync.git ~/megasync
+docker-compose -f ~/megasync/docker-compose.yml build --force-rm megasync
 ```
 #### run ####
 ```bash
-docker-compose -f ~/.docker/images/megasync/megasync.yml run \
+docker-compose -f ~/megasync/docker-compose.yml run \
     --rm \
     -e HOSTNAME="$(hostname)" \
     -e MEGAUSER="your_username" \
