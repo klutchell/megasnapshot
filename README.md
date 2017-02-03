@@ -2,7 +2,7 @@
 
 ## Description ##
 
-This utility runs [rsnapshot](http://rsnapshot.org/) and megautils docker images to upload rsnapshot backups to a MEGA.nz cloud drive.
+Utility to run [rsnapshot](http://rsnapshot.org/) and megautils docker images to upload backups to a mega.nz cloud drive.
 
 It pulls and runs the following docker images via [docker-compose](https://github.com/docker/compose):
 
