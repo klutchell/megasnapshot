@@ -21,7 +21,7 @@ snapshot_type="$2"
 # source environment variables required for containers
 . "$project_root/compose.env"
 
-if [ "$container" = "megasync" ]
+if [ "$container" = "megautils" ]
 then
 	echo "running $container with docker-compose..."
 	"$compose_bin" -f "$project_root/docker-compose.yml" run -e "HOSTNAME=$(hostname)" --rm "$container"
@@ -36,6 +36,6 @@ then
 		exit 1
 	fi
 else
-	echo "valid containers are rsnapshot|megasync" 1>&2
+	echo "valid containers are rsnapshot|megautils" 1>&2
 	exit 1
 fi

@@ -2,7 +2,7 @@
 
 ## Description ##
 
-This utility runs [rsnapshot](http://rsnapshot.org/) and megasync docker images to upload backups to a MEGA.nz cloud drive.
+This utility runs [rsnapshot](http://rsnapshot.org/) and megautils docker images to upload backups to a MEGA.nz cloud drive.
 It pulls and runs the following docker images via [docker-compose](https://github.com/docker/compose):
 
 Image | Size | Version
@@ -10,7 +10,7 @@ Image | Size | Version
 [scandio/rsnapshot](https://hub.docker.com/r/scandio/rsnapshot/) | [![](https://images.microbadger.com/badges/image/scandio/rsnapshot.svg)](https://microbadger.com/images/scandio/rsnapshot=) | [![](https://images.microbadger.com/badges/version/scandio/rsnapshot.svg)](https://microbadger.com/images/scandio/rsnapshot)
 [ubuntu:16.04](https://hub.docker.com/_/ubuntu/) | [![](https://images.microbadger.com/badges/image/ubuntu.svg)](https://microbadger.com/images/ubuntu) | [![](https://images.microbadger.com/badges/version/ubuntu.svg)](https://microbadger.com/images/ubuntu)
 
-It also uses [megatools](https://github.com/megous/megatools) to upload to MEGA.nz.
+The megautils docker image is based on ubuntu and uses [megatools](https://github.com/megous/megatools) to upload to MEGA.nz.
 
 ## Installing ##
 
@@ -33,7 +33,7 @@ sudo ~/megasync/bin/run rsnapshot alpha
 sudo ~/megasync/bin/run rsnapshot beta
 sudo ~/megasync/bin/run rsnapshot gamma
 sudo ~/megasync/bin/run rsnapshot delta
-sudo ~/megasync/bin/run megasync
+sudo ~/megasync/bin/run megautils
 ```
 
 ## Scheduling ##

@@ -3,4 +3,4 @@
  30  3  * * *   root    #PROJECT_ROOT#/bin/run rsnapshot beta
  00  3  * * 1   root    #PROJECT_ROOT#/bin/run rsnapshot gamma
  30  2  1 * *   root    #PROJECT_ROOT#/bin/run rsnapshot delta
- 00  5  * * *   root    #PROJECT_ROOT#/bin/run megasync
+ 00  5  * * *   root    #PROJECT_ROOT#/bin/run megautils

@@ -13,5 +13,5 @@ project_root="$(abs_root "$(abs_root "$0")")"
 # source environment variables required for containers
 . "$project_root/compose.env"
 
-# build megasync locally with compose
-"$compose_bin" -f "$project_root/docker-compose.yml" build --force-rm megasync
+# build megautils locally with compose
+"$compose_bin" -f "$project_root/docker-compose.yml" build --force-rm megautils

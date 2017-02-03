@@ -11,12 +11,12 @@ services:
             - /:/source:ro
             - /etc/localtime:/etc/localtime:ro
             - /dev/rtc:/dev/rtc:ro
-    megasync:
-        build: ./megasync
-        container_name: megasync
+    megautils:
+        build: ./megautils
+        container_name: megautils
         privileged: true
         volumes:
-            - ./megasync/config:/config
+            - ./megautils/config:/config
             - ./rsnapshot/target:/snapshots
             - /etc/localtime:/etc/localtime:ro
             - /dev/rtc:/dev/rtc:ro
