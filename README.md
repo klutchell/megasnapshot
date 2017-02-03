@@ -1,8 +1,9 @@
-# rsnapshot to mega #
+# megasnapshot #
 
 ## Description ##
 
-This utility runs [rsnapshot](http://rsnapshot.org/) and megautils docker images to upload backups to a MEGA.nz cloud drive.
+This utility runs [rsnapshot](http://rsnapshot.org/) and megautils docker images to upload rsnapshot backups to a MEGA.nz cloud drive.
+
 It pulls and runs the following docker images via [docker-compose](https://github.com/docker/compose):
 
 Image | Size | Version
@@ -15,31 +16,31 @@ The megautils docker image is based on ubuntu and uses [megatools](https://githu
 ## Installing ##
 
 ```bash
-git clone git@github.com:klutchell/docker-megasync.git ~/megasync
-sudo ~/megasync/bin/install
-~/megasync/bin/configure
+git clone git@github.com:klutchell/docker-megasnapshot.git ~/megasnapshot
+sudo ~/megasnapshot/bin/install
+~/megasnapshot/bin/configure
 ```
 
 ## Building ##
 
 ```bash
-~/megasync/bin/build
+~/megasnapshot/bin/build
 ```
 
 ## Running ##
 
 ```bash
-sudo ~/megasync/bin/run rsnapshot alpha
-sudo ~/megasync/bin/run rsnapshot beta
-sudo ~/megasync/bin/run rsnapshot gamma
-sudo ~/megasync/bin/run rsnapshot delta
-sudo ~/megasync/bin/run megautils
+sudo ~/megasnapshot/bin/run rsnapshot alpha
+sudo ~/megasnapshot/bin/run rsnapshot beta
+sudo ~/megasnapshot/bin/run rsnapshot gamma
+sudo ~/megasnapshot/bin/run rsnapshot delta
+sudo ~/megasnapshot/bin/run megautils
 ```
 
 ## Scheduling ##
 
 ```bash
-sudo ~/megasync/bin/schedule
+sudo ~/megasnapshot/bin/schedule
 ```
 
 ## Contributing ##
