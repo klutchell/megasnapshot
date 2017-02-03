@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+if [ "$(id -u)" != "0" ]; then
+	echo "This script must be run as root" 1>&2
+	exit 1
+fi
+
+compose_bin="$(which docker-compose | head -n1)" 
+if [ ! -x "$compose_bin" ] 
+then
+	echo "docker-compose not found, please run install script" 1>&2
+	exit 1
+fi
+
+abs_root() { echo "$(cd "$(dirname "${1}")" && pwd)"; }
+project_root="$(abs_root "$(abs_root "$0")")"
+
+container="$1"
+snapshot_type="$2"
+
+# source environment variables required for containers
+. "$project_root/compose.env"
+
+if [ "$container" = "megasync" ]
+then
+	echo "running $container with docker-compose..."
+	"$compose_bin" -f "$project_root/docker-compose.yml" run -e "HOSTNAME=$(hostname)" --rm "$container"
+elif [ "$container" = "rsnapshot" ]
+then
+	if [ "$param" = "alpha" ] || [ "$param" = "beta" ] || [ "$param" = "gamma" ] || [ "$param" = "delta" ]
+	then
+		echo "running $container $param with docker-compose..."
+		"$compose_bin" -f "$project_root/docker-compose.yml" run -e "SNAPSHOT_TYPE=$snapshot_type" --rm "$container"
+	else
+		echo "valid $container options are alpha|beta|gamma|delta" 1>&2
+		exit 1
+	fi
+else
+	echo "valid containers are rsnapshot|megasync" 1>&2
+	exit 1
+fi

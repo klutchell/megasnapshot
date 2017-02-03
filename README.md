@@ -1,46 +1,45 @@
-# docker-megasync #
+# rsnapshot to mega #
 
 ## Description ##
 
-* docker image to upload existing snapshots to a MEGA.nz cloud drive
-* uses https://github.com/megous/megatools
+This utility runs [rsnapshot](http://rsnapshot.org/) and megasync docker images to upload backups to a MEGA.nz cloud drive.
+It pulls and runs the following docker images via [docker-compose](https://github.com/docker/compose):
 
-## Usage ##
+Image | Size | Version
+--- | --- | ---
+[scandio/rsnapshot](https://hub.docker.com/r/scandio/rsnapshot/) | [![](https://images.microbadger.com/badges/image/scandio/rsnapshot.svg)](https://microbadger.com/images/scandio/rsnapshot=) | [![](https://images.microbadger.com/badges/version/scandio/rsnapshot.svg)](https://microbadger.com/images/scandio/rsnapshot)
+[ubuntu:16.04](https://hub.docker.com/_/ubuntu/) | [![](https://images.microbadger.com/badges/image/ubuntu.svg)](https://microbadger.com/images/ubuntu) | [![](https://images.microbadger.com/badges/version/ubuntu.svg)](https://microbadger.com/images/ubuntu)
 
-### docker ###
-#### build ####
+It also uses [megatools](https://github.com/megous/megatools) to upload to MEGA.nz.
+
+## Installing ##
+
 ```bash
 git clone git@github.com:klutchell/docker-megasync.git ~/megasync
-docker build -t megasync ~/megasync
-```
-#### run ####
-```bash
-docker run \
-    --rm \
-    --privileged \
-    --name=megasync \
-    -v path/to/config:/config \
-    -v path/to/snapshots/target:/snapshots \
-    -e HOSTNAME="$(hostname)" \
-    -e MEGAUSER="your_username" \
-    -e MEGAPASS="your_password" \
-    megasync
+sudo ~/megasync/bin/install
+~/megasync/bin/configure
 ```
 
-### docker-compose ###
-#### build ####
+## Building ##
+
 ```bash
-git clone git@github.com:klutchell/docker-megasync.git ~/megasync
-docker-compose -f ~/megasync/docker-compose.yml build --force-rm megasync
+~/megasync/bin/build
 ```
-#### run ####
+
+## Running ##
+
 ```bash
-docker-compose -f ~/megasync/docker-compose.yml run \
-    --rm \
-    -e HOSTNAME="$(hostname)" \
-    -e MEGAUSER="your_username" \
-    -e MEGAPASS="your_password" \
-    megasync
+sudo ~/megasync/bin/run rsnapshot alpha
+sudo ~/megasync/bin/run rsnapshot beta
+sudo ~/megasync/bin/run rsnapshot gamma
+sudo ~/megasync/bin/run rsnapshot delta
+sudo ~/megasync/bin/run megasync
+```
+
+## Scheduling ##
+
+```bash
+sudo ~/megasync/bin/schedule
 ```
 
 ## Contributing ##
@@ -50,3 +49,10 @@ docker-compose -f ~/megasync/docker-compose.yml run \
 ## Author ##
 
 * Kyle Harding <kylemharding@gmail.com>
+
+## Credit ##
+
+I give credit where it's due and would like to give a shoutout to the creators of the utilites/images used in this project:
+* [megous](https://github.com/megous/)
+* [scandio](https://bitbucket.org/scandio/)
+* [rsnapshot](https://github.com/rsnapshot/)
