@@ -9,8 +9,8 @@ abs_root() { echo "$(cd "$(dirname "${1}")" && pwd)"; }
 project_root="$(abs_root "$(abs_root "$0")")"
 
 # install cron file while replacing the project root dir
-sed "s|#PROJECT_ROOT#|$project_root|g" "$project_root/etc/cron.d/rsnapshot" > /etc/cron.d/rsnapshot
+sed "s|#PROJECT_ROOT#|$project_root|g" "$project_root/megasnapshot.cron" > /etc/cron.d/megasnapshot
 
 # set permissions
-chmod 644 /etc/cron.d/rsnapshot
-chown root:root /etc/cron.d/rsnapshot
+chmod 644 /etc/cron.d/megasnapshot
+chown root:root /etc/cron.d/megasnapshot
