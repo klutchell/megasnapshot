@@ -24,7 +24,7 @@ sudo ~/megasnapshot/bin/install
 ## Building ##
 
 ```bash
-~/megasnapshot/bin/build
+~/megasnapshot/bin/build megautils
 ```
 
 ## Running ##
