@@ -10,6 +10,8 @@ if [ ! -x "$compose_bin" ]
 then
 	echo "docker-compose not found, please run install script" 1>&2
 	exit 1
+else
+	"$compose_bin" --version
 fi
 
 abs_root() { echo "$(cd "$(dirname "${1}")" && pwd)"; }
