@@ -11,6 +11,8 @@ services:
             - /:/source:ro
             - /etc/localtime:/etc/localtime:ro
             - /dev/rtc:/dev/rtc:ro
+        environment:
+            SNAPSHOT_TYPE: "${SNAPSHOT_TYPE}"
     megautils:
         build: ./megautils
         container_name: megautils

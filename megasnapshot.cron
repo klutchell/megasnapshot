@@ -1,6 +1,6 @@
 
- 00 */4 * * *   root    #PROJECT_ROOT#/bin/run rsnapshot alpha
- 30  3  * * *   root    #PROJECT_ROOT#/bin/run rsnapshot beta
- 00  3  * * 1   root    #PROJECT_ROOT#/bin/run rsnapshot gamma
- 30  2  1 * *   root    #PROJECT_ROOT#/bin/run rsnapshot delta
+ 00 */4 * * *   root    SNAPSHOT_TYPE=alpha #PROJECT_ROOT#/bin/run rsnapshot
+ 30  3  * * *   root    SNAPSHOT_TYPE=beta #PROJECT_ROOT#/bin/run rsnapshot
+ 00  3  * * 1   root    SNAPSHOT_TYPE=gamma #PROJECT_ROOT#/bin/run rsnapshot
+ 30  2  1 * *   root    SNAPSHOT_TYPE=delta #PROJECT_ROOT#/bin/run rsnapshot
  00  5  * * *   root    #PROJECT_ROOT#/bin/run megautils

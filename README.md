@@ -21,19 +21,13 @@ sudo ~/megasnapshot/bin/install
 ~/megasnapshot/bin/configure
 ```
 
-## Building ##
-
-```bash
-~/megasnapshot/bin/build megautils
-```
-
 ## Running ##
 
 ```bash
-sudo ~/megasnapshot/bin/run rsnapshot alpha
-sudo ~/megasnapshot/bin/run rsnapshot beta
-sudo ~/megasnapshot/bin/run rsnapshot gamma
-sudo ~/megasnapshot/bin/run rsnapshot delta
+sudo SNAPSHOT_TYPE=alpha ~/megasnapshot/bin/run rsnapshot
+sudo SNAPSHOT_TYPE=beta ~/megasnapshot/bin/run rsnapshot
+sudo SNAPSHOT_TYPE=gamma ~/megasnapshot/bin/run rsnapshot
+sudo SNAPSHOT_TYPE=delta ~/megasnapshot/bin/run rsnapshot
 sudo ~/megasnapshot/bin/run megautils
 ```
 
