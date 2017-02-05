@@ -23,6 +23,6 @@ services:
             - /etc/localtime:/etc/localtime:ro
             - /dev/rtc:/dev/rtc:ro
         environment:
-            HOSTNAME: "${COMMON_HOST}"
+            HOSTNAME: "${HOSTNAME}"
             MEGAUSER: "${MEGAUSER}"
             MEGAPASS: "${MEGAPASS}"
