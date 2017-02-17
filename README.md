@@ -2,33 +2,29 @@
 
 ## Description ##
 
-Utility to run [rsnapshot](http://rsnapshot.org/) and megautils docker images to upload backups to a mega.nz cloud drive.
+Utilities to run [rsnapshot](http://rsnapshot.org/) and [megatools](https://github.com/megous/megatools/) docker images to create and upload backups to a mega.nz cloud drive.
 
-It pulls and runs the following docker images via [docker-compose](https://github.com/docker/compose):
+It pulls and runs the following docker images:
 
 Image | Size | Version
 --- | --- | ---
-[scandio/rsnapshot](https://hub.docker.com/r/scandio/rsnapshot/) | [![](https://images.microbadger.com/badges/image/scandio/rsnapshot.svg)](https://microbadger.com/images/scandio/rsnapshot=) | [![](https://images.microbadger.com/badges/version/scandio/rsnapshot.svg)](https://microbadger.com/images/scandio/rsnapshot)
-[ubuntu:16.04](https://hub.docker.com/_/ubuntu/) | [![](https://images.microbadger.com/badges/image/ubuntu.svg)](https://microbadger.com/images/ubuntu) | [![](https://images.microbadger.com/badges/version/ubuntu.svg)](https://microbadger.com/images/ubuntu)
-
-The megautils docker image is based on ubuntu and uses [megatools](https://github.com/megous/megatools) to upload to MEGA.nz.
+[scandio/rsnapshot](https://hub.docker.com/r/scandio/rsnapshot/) | [![](https://images.microbadger.com/badges/image/scandio/rsnapshot.svg)](https://microbadger.com/images/scandio/rsnapshot) | [![](https://images.microbadger.com/badges/version/scandio/rsnapshot.svg)](https://microbadger.com/images/scandio/rsnapshot)
+[klutchell/megatools](https://hub.docker.com/r/klutchell/megatools/) |[![](https://images.microbadger.com/badges/image/klutchell/megatools.svg)](https://microbadger.com/images/klutchell/megatools) | [![](https://images.microbadger.com/badges/version/klutchell/megatools.svg)](https://microbadger.com/images/klutchell/megatools)
 
 ## Installing ##
 
 ```bash
-git clone git@github.com:klutchell/docker-megasnapshot.git ~/megasnapshot
-sudo ~/megasnapshot/bin/install
-~/megasnapshot/bin/configure
+git clone git@github.com:klutchell/megasnapshot.git ~/megasnapshot
 ```
 
 ## Running ##
 
 ```bash
-sudo SNAPSHOT_TYPE=alpha ~/megasnapshot/bin/run rsnapshot
-sudo SNAPSHOT_TYPE=beta ~/megasnapshot/bin/run rsnapshot
-sudo SNAPSHOT_TYPE=gamma ~/megasnapshot/bin/run rsnapshot
-sudo SNAPSHOT_TYPE=delta ~/megasnapshot/bin/run rsnapshot
-sudo ~/megasnapshot/bin/run megautils
+sudo ~/megasnapshot/bin/rsnapshot alpha
+sudo ~/megasnapshot/bin/rsnapshot beta
+sudo ~/megasnapshot/bin/rsnapshot gamma
+sudo ~/megasnapshot/bin/rsnapshot delta
+sudo ~/megasnapshot/bin/megaupload
 ```
 
 ## Scheduling ##
