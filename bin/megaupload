@@ -17,10 +17,10 @@ remote_path="/Root/snapshots/$(hostname)"
 tarball="$(date -r "${snapshot}" +%Y.%m.%d_%H.%M.%S).tar.gz"
 
 # system config (do not edit)
-megals="docker run -it --rm --name megatools -v $project_root:/workdir -w /workdir klutchell/megatools megals --config ${megarc#$project_root/}"
-megamkdir="docker run -it --rm --name megatools -v $project_root:/workdir -w /workdir klutchell/megatools megamkdir --config ${megarc#$project_root/}"
-megarm="docker run -it --rm --name megatools -v $project_root:/workdir -w /workdir klutchell/megatools megarm --config ${megarc#$project_root/}"
-megaput="docker run -it --rm --name megatools -v $project_root:/workdir -w /workdir klutchell/megatools megaput --config ${megarc#$project_root/}"
+megals="docker run -i --rm --name megatools -v $project_root:/workdir -w /workdir klutchell/megatools megals --config ${megarc#$project_root/}"
+megamkdir="docker run -i --rm --name megatools -v $project_root:/workdir -w /workdir klutchell/megatools megamkdir --config ${megarc#$project_root/}"
+megarm="docker run -i --rm --name megatools -v $project_root:/workdir -w /workdir klutchell/megatools megarm --config ${megarc#$project_root/}"
+megaput="docker run -i --rm --name megatools -v $project_root:/workdir -w /workdir klutchell/megatools megaput --config ${megarc#$project_root/}"
 
 [ -d "${snapshot}" ] || { echo "snapshot not found"; exit 1; }
 
