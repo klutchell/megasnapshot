@@ -1,2 +1,2 @@
 # run megaupload once a day at 5am
-00 5 * * *    root   "#PROJECT_ROOT#/bin/megaupload" 2>&1 | ts >> /var/log/megaupload.log &
+00 5 * * *    root   "#PROJECT_ROOT#/bin/megaupload" 2>&1 | ts >> /var/log/megaupload.log

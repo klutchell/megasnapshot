@@ -1,8 +1,8 @@
 # run rsnapshot alpha once every 4 hours
-00 */4 * * *  root   "#PROJECT_ROOT#/bin/rsnapshot" alpha 2>&1 | ts >> /var/log/rsnapshot.log &
+00 */4 * * *  root   "#PROJECT_ROOT#/bin/rsnapshot" alpha 2>&1 | ts >> /var/log/rsnapshot.log
 # run rsnapshot beta once a day at 3:30am
-30 3 * * *    root   "#PROJECT_ROOT#/bin/rsnapshot" beta 2>&1 | ts >> /var/log/rsnapshot.log &
+30 3 * * *    root   "#PROJECT_ROOT#/bin/rsnapshot" beta 2>&1 | ts >> /var/log/rsnapshot.log
 # run rsnapshot gamma once a week on sunday
-00 3 * * 1    root   "#PROJECT_ROOT#/bin/rsnapshot" gamma 2>&1 | ts >> /var/log/rsnapshot.log &
+00 3 * * 1    root   "#PROJECT_ROOT#/bin/rsnapshot" gamma 2>&1 | ts >> /var/log/rsnapshot.log
 # run rsnapshot delta once a month on the 1st
-30 2 1 * *    root   "#PROJECT_ROOT#/bin/rsnapshot" delta 2>&1 | ts >> /var/log/rsnapshot.log &
+30 2 1 * *    root   "#PROJECT_ROOT#/bin/rsnapshot" delta 2>&1 | ts >> /var/log/rsnapshot.log

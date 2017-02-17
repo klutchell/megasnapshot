@@ -19,7 +19,7 @@ then
 	echo "invalid snapshot type: $snapshot_type"; exit 1
 fi
 
-docker run -i --rm \
+docker run -it --rm \
 --name "rsnapshot" \
 -v "$config:/config" \
 -v "$snapshots:/target" \
