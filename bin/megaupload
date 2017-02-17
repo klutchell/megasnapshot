@@ -39,7 +39,7 @@ count_remote()
 	$megals -lhn --header "${remote_path}"
 	
 	# count remote snapshots
-	remote_count="$($megals -n "${remote_path}" | wc -l)"
+	remote_count="$(echo "$($megals -n "${remote_path}")" | wc -l)"
 	echo "remote snapshot count: $remote_count"
 }
 
@@ -64,14 +64,15 @@ $megaput --path "${remote_path}/${tarball}" "${tempdir#$project_root/}/${tarball
 
 count_remote
 
-while [ "${remote_count}" -gt 3 ]
+counter=0
+while [ "${remote_count}" -gt 3 ] && [ "${counter}" -lt 3 ]
 do
 	# delete oldest snapshot
-	oldest="$($megals -n "${remote_path}" | head -n1)"
+	oldest="$(echo "$($megals -n "${remote_path}")" | head -n1)"
 	echo "removing ${oldest}..."
 	$megarm "${remote_path}/${oldest}"
-	
 	count_remote
+	let counter=counter+1
 done
 
 echo "cleaning temporary dir..."
