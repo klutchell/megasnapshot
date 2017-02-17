@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+
+if [ "$(id -u)" != "0" ]; then
+	echo "This script must be run as root" 1>&2
+	exit 1
+fi
+
+# system config (do not edit)
+abs_root() { echo "$(cd "$(dirname "${1}")" && pwd)"; }
+project_root="$(abs_root "$(abs_root "$0")")"
+
+# local and remote paths
+snapshot="${project_root}/snapshots/alpha.0"
+tempdir="${project_root}/tmp"
+megarc="${project_root}/megaupload.d/.megarc"
+remote_path="/Root/snapshots/$(hostname)"
+tarball="$(date -r "${snapshot}" +%Y.%m.%d_%H.%M.%S).tar.gz"
+
+# system config (do not edit)
+megals="docker run -it --rm --name megatools -v $project_root:/workdir -w /workdir klutchell/megatools megals --config ${megarc#$project_root/}"
+megamkdir="docker run -it --rm --name megatools -v $project_root:/workdir -w /workdir klutchell/megatools megamkdir --config ${megarc#$project_root/}"
+megarm="docker run -it --rm --name megatools -v $project_root:/workdir -w /workdir klutchell/megatools megarm --config ${megarc#$project_root/}"
+megaput="docker run -it --rm --name megatools -v $project_root:/workdir -w /workdir klutchell/megatools megaput --config ${megarc#$project_root/}"
+
+[ -d "${snapshot}" ] || { echo "snapshot not found"; exit 1; }
+
+echo "cleaning temporary dir..."
+rm -rvf "${tempdir}"
+mkdir -p "${tempdir}"
+
+# create remote dir
+echo "creating remote directory..."
+$megamkdir "${remote_path}"
+
+count_remote()
+{
+	# list remote snapshots
+	echo "remote directory contents:"
+	$megals -lhn --header "${remote_path}"
+	
+	# count remote snapshots
+	remote_count="$($megals -n "${remote_path}" | wc -l)"
+	echo "remote snapshot count: $remote_count"
+}
+
+count_remote
+
+# check if already exists
+echo "checking if ${tarball} already exists..."
+if [ -n "$($megals -n "${remote_path}" | grep "${tarball}")" ]
+then
+	echo "${tarball} already exists on remote"; exit 0
+fi
+
+# compress to cache volume
+pushd "${snapshot}" >/dev/null
+echo "compressing ${snapshot} to ${tarball}..."
+tar -czf "${tempdir}/${tarball}" * || exit 1
+popd >/dev/null
+
+# upload snapshot
+echo "uploading ${tarball}..."
+$megaput --path "${remote_path}/${tarball}" "${tempdir#$project_root/}/${tarball}"
+
+count_remote
+
+while [ "${remote_count}" -gt 3 ]
+do
+	# delete oldest snapshot
+	oldest="$($megals -n "${remote_path}" | head -n1)"
+	echo "removing ${oldest}..."
+	$megarm "${remote_path}/${oldest}"
+	
+	count_remote
+done
+
+echo "cleaning temporary dir..."
+rm -rvf "${tempdir}"
+mkdir -p "${tempdir}"
+
+exit 0

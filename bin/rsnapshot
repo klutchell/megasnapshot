@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+if [ "$(id -u)" != "0" ]; then
+	echo "This script must be run as root" 1>&2
+	exit 1
+fi
+
+# system config (do not edit)
+abs_root() { echo "$(cd "$(dirname "${1}")" && pwd)"; }
+project_root="$(abs_root "$(abs_root "$0")")"
+
+# local and remote paths
+snapshots="${project_root}/snapshots"
+config="${project_root}/rsnapshot.d"
+
+snapshot_type="$1"
+if [ "$snapshot_type" != "alpha" ] && [ "$snapshot_type" != "beta" ] && [ "$snapshot_type" != "gamma" ] && [ "$snapshot_type" != "delta" ]
+then
+	echo "invalid snapshot type: $snapshot_type"; exit 1
+fi
+
+docker run -it --rm \
+--name "rsnapshot" \
+-v "$config:/config" \
+-v "$snapshots:/target" \
+-v "/:/source:ro" \
+-e "SNAPSHOT_TYPE=$snapshot_type" \
+"scandio/rsnapshot"

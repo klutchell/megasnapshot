@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+if [ "$(id -u)" != "0" ]; then
+	echo "This script must be run as root" 1>&2
+	exit 1
+fi
+
+# system config (do not edit)
+abs_root() { echo "$(cd "$(dirname "${1}")" && pwd)"; }
+project_root="$(abs_root "$(abs_root "$0")")"
+
+# local and remote paths
+cron_files="${project_root}/cron.d/*"
+system_cron="/etc/cron.d"
+
+for cron in $cron_files
+do
+	# install cron file while replacing the project root dir
+	sed "s|#PROJECT_ROOT#|$project_root|g" "$cron" > "$system_cron/$(basename "$cron")"
+	
+	# set permissions
+	chmod 644 "$system_cron/$(basename "$cron")"
+	chown root:root "$system_cron/$(basename "$cron")"
+done
+
+

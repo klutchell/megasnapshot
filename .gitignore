@@ -42,6 +42,6 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-megautils/config
-rsnapshot/target
-compose.env
+snapshots
+.megarc
+tmp
