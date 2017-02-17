@@ -33,13 +33,9 @@ sudo ~/megasnapshot/bin/megaupload
 sudo ~/megasnapshot/bin/schedule
 ```
 
-## Contributing ##
-
-* n/a
-
 ## Author ##
 
-* Kyle Harding <kylemharding@gmail.com>
+Kyle Harding <kylemharding@gmail.com>
 
 ## Credit ##
 
