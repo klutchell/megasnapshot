@@ -65,7 +65,7 @@ $megaput --path "${remote_path}/${tarball}" "${tempdir#$project_root/}/${tarball
 count_remote
 
 counter=0
-while [ "${remote_count}" -gt 3 ] && [ "${counter}" -lt 3 ]
+while [ "${remote_count}" -gt 7 ] && [ "${counter}" -lt 3 ]
 do
 	# delete oldest snapshot
 	oldest="$(echo "$($megals -n "${remote_path}")" | head -n1)"
